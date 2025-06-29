@@ -1,17 +1,19 @@
 #!/bin/bash
 
 ARCH=$(uname -a)
-PHYCPU=$()
-VRTCPU=$()
+PHYCPU=$(lscpu | grep "Socket(s):" | awk '{print $2}')
+VRTCPU=$(lscpu | grep "^CPU(s):" | awk '{print $2}')
 MU=$()
 DU=$()
 CPUL=$()
 LB=$()
 LVMU=$(lsblk | grep -q "lvm" && echo "yes" || echo "no")
-CONTCP=$()
-UL=$()
-NW=$()
-S=$()
+CONTCP=$(ss -ta | grep -c "ESTAB")
+UL=$(who | wc -l)
+IP=$(hostname -I)
+MAC=$(ip address | awk '/ether/ {print $2}')
+NW=$(echo "IP $IP($MAC)")
+S=$(journalctl _COMM=sudo | grep -c COMMAND)
 CURR_TIME=$(date '+%a %b %d %T %Y')
 
 wall "
