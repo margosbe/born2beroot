@@ -25,7 +25,7 @@ wall "
 #vCPU : $VRTCPU
 #Memory Usage: $MUSED/$MTOTAL"MB" ($MPERCENTAGE%)
 #Disk Usage: $DUSED/$DTOTAL ($DPERCENTAGE)
-#CPU load: $CPUL
+#CPU load: $CPUL%
 #Last boot: $LB
 #LVM use: $LVMU
 #Connections TCP : $CONTCP ESTABLISHED
