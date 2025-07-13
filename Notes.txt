@@ -1,0 +1,79 @@
+Notes
+
+VM:
+-> A virtual machine (VM) emulates a physical computer by using software to run an operating system inside another OS.
+It enables isolated testing and secure system management without affecting the host.
+It runs inside your physical computer but is isolated from it.
+It has its own “virtual” hardware (CPU, memory, storage…) that is simulated by software (hypervisors).
+
+Virtualization and Hypervisor:
+Virtualization is the process of creating a virtual machine on a physical machine with the help of hypervisors which are a lightweight software layer.
+
+Vdi files:
+When setting up your machine, it’s required to provide a VDI file, aka Virtual disk image.
+It acts like a virtual hard drive, storing the entire environment of a virtual machine.
+
+Why Debian:
+-> I chose Debian because it is lightweight, stable, and secure, making it ideal for server environments. It also aligns well with the project’s requirements and constraints.
+
+CentOS vs Debian:
+->  Package Managers: CentOS uses yum/dnf, while Debian uses apt.
+->  Security Modules: CentOS uses SELinux, Debian uses AppArmor.
+->  Default Configs: Debian tends to be more minimal by default; CentOS has more pre-installed tools.
+-> apt vs aptitude: aptitude is a frontend for apt, offering a TUI. apt is faster, script-friendly, and more commonly used.
+Aptitude and apt itself doesn’t handle these core tasks directly.
+Instead, it builds upon DPKG and other tools, providing a more user-friendly interface and advanced features.
+However, the security of those features ultimately depends on the underlying package management system’s robustness and trustworthiness.
+-> AppArmor: It's a Mandatory Access Control (MAC) system that confines programs to a limited set of resources to enhance system security.
+AppArmor LSM stands for Application Armor and uses profiles to define and enforce rules for processes and resources.
+Profiles are files that specify the permissions and restrictions for each process or application, such as which files, directories, sockets, ports, and devices it can access, and how. 
+You can run aa-status in terminal to check if AppArmor is running.
+
+What's a VM for:
+-> Safe sandboxing, System recovery, Software testing, Resource efficiency and portability
+
+APT:
+apt (Advanced package tool) is a lower level package manager that comes by default and lacks UI so it’s restricted only to command line.
+The package manager reads the /etc/apt/sources.list file and the contents of the /etc/apt/sources.list.d folder to retrieve the ones that you need with all the dependencies.
+
+Linux security module is a framework which allows the linux kernel to enhance the protection system and support various security modules in virtual machines.
+They implement mandatory access control (MAC) on Linux systems. MAC is a policy-based mechanism that defines and enforces rules for how processes and users can access resources such as files, directories, sockets, ports, and devices. 
+
+UFW:
+
+The Uncomplicated Firewall or UFW is a management layer / frontend for iptables which aims to simplify the management of your firewall.
+UFW is not a firewall itself, but rather a firewall management tool.
+
+SSH Protocol:
+Secure Shell is a cryptographic network protocol that encrypts all communication allowing secure access and remote computers management over a network.
+It provides secure file transfer (SFTP) capabilities, strong encryption algorithms like AES, port forwarding capabilities allowing users to access restricted services on remote servers securely, X11 forwarding capabilities allowing users to run graphical applications remotely without having to install them locally, agent forwarding capabilities allowing users to use SSH keys for authentication on remote servers without having to enter their password every time.
+SSH operates on a client-server architecture, where the client sends a connection request to the server on port 22 (the default SSH port) and requests a secure communication channel.
+
+Daemon:
+A daemon is a background process or service that runs on a computer system independently of user interaction.
+It ensures that necessary services and processes are available to users and applications and play a crucial role in the background operation and functionality of a computer system.
+Daemons are typically started during the system boot process, they do not interact with terminals, as they operate independently of the user’s session. They are meant to be long-running processes, staying active for the duration of the system uptime.
+
+SSH config cmd:
+check status:
+-> shows detailed information about whether a service is running: sudo systemctl status ssh
+-> apply changes: sudo vim /etc/ssh/sshd_config
+-> restart the ssh to apply changes: sudo systemctl restart ssh
+-> shows current port: sudo grep Port /etc/ssh/sshd_config
+
+Users and groups cmd:
+-> usermod -aG sudo your_username
+-> getent group sudo
+-> access sudoers: sudo vim /etc/sudoers or sudo visudo
+
+Password Policy cmds:
+lib installed for pass policy: libpam-pwquality
+show defined policies: sudo cat /etc/pam.d/common-password
+show times defined for policy: sudo cat /etc/login.defs
+change time policies: chage -m 30, chage -M 2, chage -W 7
+apply to a user: chage -l username
+
+Bonus:
+wordpress folder: /var/www/html/wordpress
+php version: php -v
+telnet: telnet telehack.com .aquarium
